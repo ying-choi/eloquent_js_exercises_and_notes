@@ -1,2 +1,9 @@
-# eloquent_js_exercises_and_notes
-Learn JS
+# Eloquent JavaScript
+### Written by Marijn Haverbeke
+#### 3rd edition
+- [Link to free online text](https://eloquentjavascript.net/)
+- 📕 Notes
+- ✏️ Exercises
+
+#### Progress
+- 04/30: On Chapter 4
