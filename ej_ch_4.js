@@ -41,3 +41,120 @@ function sum(arr) {
   }
   return sum;
 }
+
+/* Reversing an array
+   For this exercise, write two functions, reverseArray and reverseArrayInPlace.
+   
+   The first, reverseArray, takes an array as argument and produces a new array
+   that has the same elements in the inverse order.
+   
+   The second, reverseArrayInPlace, does what the reverse method does: it modifies
+   the array given as argument by reversing its elements.
+   
+   Neither may use the standard reverse method.
+*/
+
+function reverseArray(arr) {
+  let newArr = [];
+  
+  for(let i = arr.length - 1; i >= 0; i--) {
+    newArr.push(arr[i]);
+  }
+
+  return newArr;
+}
+
+function reverseArrayInPlace(arr) {
+  for(let i = 0; i <= arr.length / 2; i++) {
+    let temp = arr[i];
+    let otherIndex = arr.length - 1 - i;
+    arr[i] = arr[otherIndex];
+    arr[otherIndex] = temp;
+  }
+}
+
+
+/* Ch. 4 Notes */
+
+// Fun things to do with arrays!
+
+let fruits = ["apple", "cherry", "strawberry"];
+
+/* let fruits = [🍎, 🍒, 🍓]
+   addToStart(🍌);
+   → I have 4 fruits
+   console.log(fruits)
+   → [🍌, 🍎, 🍒, 🍓] */
+function addToStart(fruit) {
+  let numOfFruits = fruits.unshift(fruit);
+  console.log("I have " + numOfFruits + " fruits");
+}
+
+/* let fruits = [🍎, 🍒, 🍓]
+   removeFromStart();
+   → I ate a 🍎
+   console.log(fruits)
+   → [🍒, 🍓] */
+function removeFromStart() {
+  let fruitEaten = fruits.shift();
+  console.log("I ate a " + fruitEaten);
+}
+
+/* let fruits = [🍎, 🍒, 🍓]
+   addToEnd(🍌);
+   → I have 4 fruits
+   console.log(fruits)
+   → [🍎, 🍒, 🍓, 🍌] */
+function addToEnd(fruit) {
+  let numOfFruits = fruits.push(fruit)
+  console.log("I have " + numOfFruits + " fruits");
+}
+
+/* let fruits = [🍎, 🍒, 🍓]
+   removeFromEnd();
+   → I don't like 🍓
+   console.log(fruits)
+   → [🍎, 🍒] */
+function removeFromEnd() {
+  let fruitRemoved = fruits.pop();
+  console.log("I don't like " + fruitRemoved);
+}
+
+/* let fruits = [🍎, 🍒, 🍓]
+   let newFruits = removeAFruit(🍒);
+   console.log(fruits)
+   → [🍎, 🍒, 🍓]
+   console.log(newFruits)
+   → [🍎, 🍓] */
+function removeAFruit(fruit) {
+  let index = fruits.indexOf(fruit);
+  if (index === -1) { return; }
+
+  // creates a new array
+  return fruits.slice(0, index).concat(fruits.slice(index + 1));
+}
+
+// Rest parameters
+// For a function to accept any number of args
+
+/* console.log(concatenate("hello", "world", "goodbye", "forever"));
+   → hello word goodbye forever */
+function concatenate(...strings) {
+  let word = "";
+
+  // the rest parameter is bound to an array
+  for(str of strings) {
+    word += !word ? str : " " + str;
+  }
+
+  return word;
+}
+
+function threeDots() {
+  let numbers = [3, 4, 5, 6];
+  // Similar but instead "spreads" out the array
+  console.log(...numbers);
+  // → 3 4 5 6
+  console.log(numbers);
+  // → [ 3, 4, 5, 6 ]
+}
