@@ -73,6 +73,115 @@ function reverseArrayInPlace(arr) {
   }
 }
 
+/* A list
+   Write a function arrayToList that builds up a list structure like
+   the one shown when given [1, 2, 3] as argument.
+
+   Also write a listToArray function that produces an array from a list.
+
+   Then add a helper function prepend, which takes an element and a list
+   and creates a new list that adds the element to the front of the input list.
+
+   And nth, which takes a list and a number and returns the element at the
+   given position in the list (with zero referring to the first element)
+   or undefined when there is no such element.
+
+   If you haven’t already, also write a recursive version of nth.
+*/
+
+// [10, 20]
+function arrayToList(arr) {
+  let list;
+
+  for(let i = arr.length - 1; i >= 0; i--) {
+    if (!list) {
+      list = {
+        value: arr[i],
+        rest: null,
+      };
+    } else {
+      list = {
+        value: arr[i],
+        rest: list,
+      };
+    }
+  }
+
+  return list;
+}
+
+// { value: 10, rest: { value: 20, rest: null } }
+function listToArray(list) {
+  let arr = [];
+
+  // could have also done this:
+  // for (let node = list; node; node = node.rest) {}
+  while(list) {
+    arr.push(list.value);
+    list = list.rest;
+  }
+
+  return arr;
+}
+
+function prepend(element, list) {
+  let newList = arrayToList(listToArray(list));
+  return { value: element, rest: newList };
+}
+
+function nth1(list, number) {
+  let count = 0;
+  while(list) {
+    if(count === number) { return list.value; }
+    count++;
+    list = list.rest;
+  }
+  return;
+}
+
+function nth2(list, number) {
+  let arr = listToArray(list);
+  if(number >= arr.length) { return; }
+  return arr[number];
+}
+
+function recursiveNth(list, number) {
+  if (list === null) { return; }
+  if (number === 0 ) { return list.value; }
+  return recursiveNth(list.rest, number - 1);
+}
+
+/* Deep comparison
+   Write a function deepEqual that takes two values and returns true only if
+   they are the same value or are objects with the same properties,
+   where the values of the properties are equal when compared with a
+   recursive call to deepEqual.
+*/
+
+function deepEqual(obj1, obj2) {
+
+  // need to check for null explicitly because
+  // typeof null is equal to object
+  if(obj1 === null && obj2 === null) { return true; }
+
+  if(typeof obj1 !== typeof obj2) { return false; }
+
+  if(typeof obj1 !== 'object' && typeof obj2 !== 'object') {
+    return obj1 === obj2;
+  }
+
+  if(typeof obj1 === 'object' && typeof obj2 === 'object') {
+    let keys1 = Object.keys(obj1);
+    let keys2 = Object.keys(obj2);
+
+    if(keys1.length !== keys2.length) { return false; }
+
+    for(let i = 0; i < keys1.length; i++) {
+      if(keys1[i] !== keys2[i]) { return false; }
+      return deepEqual(obj1[keys1[i]], obj2[keys2[i]]);
+    }
+  }
+}
 
 /* Ch. 4 Notes */
 

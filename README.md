@@ -6,4 +6,4 @@
 - ✏️ Exercises
 
 #### Progress
-- 04/30 - 05/01: On Chapter 4
+- 04/30 - 05/02: Chapter 4
